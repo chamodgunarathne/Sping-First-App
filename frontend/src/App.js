@@ -6,6 +6,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddUser from "./users/AddUser";
 import EditUser from "./users/EditUser";
 import ViewUser from "./users/ViewUser";
+import Sales from "./sales/Sales";
+import AddSales from "./sales/AddSales";
+import ViewSales from "./sales/ViewSales";
+import EditSales from "./sales/EditSales";
 
 function App() {
   return (
@@ -18,6 +22,10 @@ function App() {
           <Route exact path="/adduser" element={<AddUser />} />
           <Route exact path="/edituser/:id" element={<EditUser />} />
           <Route exact path="/viewuser/:id" element={<ViewUser />} />
+          <Route exact path="/sales" element={<Sales />} />
+          <Route exact path="/addSales" element={<AddSales />} />
+          <Route exact path="/viewSales/:id" element={<ViewSales />} />
+          <Route exact path="/editSales/:id" element={<EditSales />} />
         </Routes>
       </Router>
     </div>

@@ -1,60 +1,44 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function EditUser() {
+export default function AddUser() {
   let navigate = useNavigate();
 
-  const { id } = useParams();
-
-  const [user, setUser] = useState({
+  const [item, setItem] = useState({
     name: "",
-    username: "",
-    email: "",
+    sales: "",
+    price: "",
   });
 
-  const { name, username, email } = user;
+  const { name, sales, price } = item;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setItem({ ...item, [e.target.name]: e.target.value });
   };
-
-  useEffect(() => {
-    loadUser();
-  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const isConfirmed = window.confirm("Are you sure you want to edit the details?");
-  
-    if (isConfirmed) {
-      await axios.put(`http://localhost:8080/user/${id}`, user);
-      navigate("/sales");
-    } else {
-      console.log("Form submission canceled.");
-    }
-  };
-  
-  const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/users/${id}`);
-    setUser(result.data);
+    await axios.post("http://localhost:8080/item", item);
+    window.alert("New user added to the system");
+    navigate("/sales");
   };
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Edit User</h2>
+          <h2 className="text-center m-4">Register User</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
               <label htmlFor="Name" className="form-label">
-                Name
+                Item Name
               </label>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Enter your name"
+                placeholder="Enter item name"
                 name="name"
                 value={name}
                 onChange={(e) => onInputChange(e)}
@@ -62,34 +46,34 @@ export default function EditUser() {
             </div>
             <div className="mb-3">
               <label htmlFor="Username" className="form-label">
-                Username
+                Item Sales
               </label>
               <input
-                type={"text"}
+                type={"number"}
                 className="form-control"
-                placeholder="Enter your username"
-                name="username"
-                value={username}
+                placeholder="Enter sales count"
+                name="sales"
+                value={sales}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <div className="mb-3">
               <label htmlFor="Email" className="form-label">
-                E-mail
+                Item Price
               </label>
               <input
-                type={"text"}
+                type={"number"}
                 className="form-control"
-                placeholder="Enter your e-mail address"
-                name="email"
-                value={email}
+                placeholder="Enter price for the item"
+                name="price"
+                value={price}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
-            <Link className="btn btn-outline-danger mx-2" to="/sales">
+            <Link className="btn btn-outline-danger mx-2" to="/">
               Cancel
             </Link>
           </form>

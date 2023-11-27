@@ -20,12 +20,18 @@ export default function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
-          <Link className="btn btn-outline-light" to="/adduser">
-            Add User
-          </Link>
+          <div>
+            <Link className="btn btn-outline-light" to="/adduser">
+              Add User
+            </Link>
+            &nbsp;
+            <Link className="btn btn-warning" to="/sales">
+              Sales
+            </Link>
+          </div>
         </div>
       </nav>
+      <br />
     </div>
   );
 }

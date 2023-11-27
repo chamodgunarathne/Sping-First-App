@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
 export default function Home() {
-  const [users, setUsers] = useState([]);
+  const [items, setItems] = useState([]);
 
   const { id } = useParams();
 
@@ -12,15 +12,15 @@ export default function Home() {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8080/users");
-    setUsers(result.data);
+    const result = await axios.get("http://localhost:8080/items");
+    setItems(result.data);
   };
  
 
   const deleteUser = async (id) => {
     const isConfirmed = window.confirm("Are you sure you want to delete the user?");
     if (isConfirmed) {
-      await axios.delete(`http://localhost:8080/userDel/${id}`);
+      await axios.delete(`http://localhost:8080/itemDelete/${id}`);
     loadUsers();
     } else {
       console.log("Error deleted item.");
@@ -29,43 +29,55 @@ export default function Home() {
   };
 
   return (
-    <div className="container">
+    <>
+    <div className="d-flex justify-content-end" style={{ margin: '10px' }}>
+    <Link className="btn btn-secondary" to="/addSales">
+        Add Sales
+    </Link>
+</div>
+
+    
+    
+            <div className="container">
+                    
       <div className="py-4">
         <table className="table border shadow">
           <thead>
             <tr>
               <th scope="col">Id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Username</th>
-              <th scope="col">Email</th>
+              <th scope="col">Item</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Total</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {items.map((item, index) => (
               <tr>
                 <th scope="row" key={index}>
                   {index + 1}
                 </th>
-                <td>{user.name}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
+                <td>{item.name}</td>
+                <td>{item.sales}</td>
+                <td>{item.price}</td>
+                <td>{item.price * item.sales}</td>
                 <td>
                   <Link
                     className="btn btn-primary mx-2"
-                    to={`/viewuser/${user.id}`}
+                    to={`/viewSales/${item.id}`}
                   >
                     View
                   </Link>
                   <Link
                     className="btn btn-outline-primary mx-2"
-                    to={`/edituser/${user.id}`}
+                    to={`/editSales/${item.id}`}
                   >
                     Edit
                   </Link>
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => deleteUser(user.id)}
+                    onClick={() => deleteUser(item.id)}
                   >
                     Delete
                   </button>
@@ -76,5 +88,8 @@ export default function Home() {
         </table>
       </div>
     </div>
+    
+    </>
+    
   );
 }

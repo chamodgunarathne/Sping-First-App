@@ -7,16 +7,16 @@ export default function EditUser() {
 
   const { id } = useParams();
 
-  const [user, setUser] = useState({
+  const [item, setItem] = useState({
     name: "",
-    username: "",
-    email: "",
+    sales: "",
+    price: "",
   });
 
-  const { name, username, email } = user;
+  const { name, sales, price } = item;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setItem({ ...item, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
@@ -28,16 +28,16 @@ export default function EditUser() {
     const isConfirmed = window.confirm("Are you sure you want to edit the details?");
   
     if (isConfirmed) {
-      await axios.put(`http://localhost:8080/user/${id}`, user);
-      navigate("/sales");
+      await axios.put(`http://localhost:8080/itemUpdate/${id}`, item);
+      navigate("/");
     } else {
       console.log("Form submission canceled.");
     }
   };
   
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/users/${id}`);
-    setUser(result.data);
+    const result = await axios.get(`http://localhost:8080/item/${id}`);
+    setItem(result.data);
   };
 
   return (
@@ -68,8 +68,8 @@ export default function EditUser() {
                 type={"text"}
                 className="form-control"
                 placeholder="Enter your username"
-                name="username"
-                value={username}
+                name="sales"
+                value={sales}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
@@ -81,15 +81,15 @@ export default function EditUser() {
                 type={"text"}
                 className="form-control"
                 placeholder="Enter your e-mail address"
-                name="email"
-                value={email}
+                name="price"
+                value={price}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
-            <Link className="btn btn-outline-danger mx-2" to="/sales">
+            <Link className="btn btn-outline-danger mx-2" to="/">
               Cancel
             </Link>
           </form>
