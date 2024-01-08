@@ -10,15 +10,18 @@ import Sales from "./sales/Sales";
 import AddSales from "./sales/AddSales";
 import ViewSales from "./sales/ViewSales";
 import EditSales from "./sales/EditSales";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
-
+        
         <Routes>
-          <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Login />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/home" element={<Home />} />
           <Route exact path="/adduser" element={<AddUser />} />
           <Route exact path="/edituser/:id" element={<EditUser />} />
           <Route exact path="/viewuser/:id" element={<ViewUser />} />

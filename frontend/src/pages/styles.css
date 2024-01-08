@@ -1,0 +1,50 @@
+/* Add this CSS to your styles.css or App.css file */
+/* Add this CSS to your styles.css or App.css file */
+
+.login-form-container {
+    width: 750px;
+    margin: auto;
+    padding: 20px;
+    
+    border-radius: 5px;
+    margin-top: 50px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    height: 80vh; 
+  }
+  
+  .login-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: large;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  
+  .login-button {
+    background-color: #4caf50;
+    width:150px;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .login-button:hover {
+    background-color: #45a049;
+  }
+  

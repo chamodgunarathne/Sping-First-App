@@ -12,15 +12,42 @@ export default function Home() {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8080/users");
-    setUsers(result.data);
+    try {
+      const accessToken = localStorage.getItem('refreshToken');
+      console.log("Access :", accessToken);
+      if (!accessToken) {
+        // Handle the case when there is no access token
+        console.error('Access token not available');
+        return;
+      }
+  
+      const result = await axios.get("http://localhost:8080/api/v1/admin/users", {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+         // Add this line
+      },
+      
+    });
+  
+      setUsers(result.data);
+      console.log(result.data);
+    } catch (error) {
+      // Handle errors, e.g., token expiration or network issues
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        console.error('Response status:', error.response.status);
+        console.error('Response headers:', error.response.headers);
+      } else if (error.request) {
+        console.error('No response received. Request:', error.request);
+      } else {
+        console.error('Error message:', error.message);
+      }
+    }
   };
- 
-
   const deleteUser = async (id) => {
     const isConfirmed = window.confirm("Are you sure you want to delete the user?");
     if (isConfirmed) {
-      await axios.delete(`http://localhost:8080/userDel/${id}`);
+      await axios.delete(`http://localhost:8080/api/v1/admin/userDel/${id}`);
     loadUsers();
     } else {
       console.log("Error deleted item.");
