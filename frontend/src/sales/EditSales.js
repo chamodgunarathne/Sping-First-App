@@ -28,7 +28,7 @@ export default function EditUser() {
     const isConfirmed = window.confirm("Are you sure you want to edit the details?");
   
     if (isConfirmed) {
-      await axios.put(`http://localhost:8080/itemUpdate/${id}`, item);
+      await axios.put(`http://localhost:8080/api/v1/admin/itemUpdate/${id}`, item);
       navigate("/");
     } else {
       console.log("Form submission canceled.");
@@ -36,7 +36,7 @@ export default function EditUser() {
   };
   
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/item/${id}`);
+    const result = await axios.get(`http://localhost:8080/api/v1/admin/item/${id}`);
     setItem(result.data);
   };
 

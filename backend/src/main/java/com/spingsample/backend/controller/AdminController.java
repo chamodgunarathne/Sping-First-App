@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin("http://localhost:3001")
 @RequestMapping("/api/v1/admin")
 public class AdminController {
 
@@ -22,4 +22,34 @@ public class AdminController {
     public AdminController(AdminService adminService){
         this.adminService = adminService;
     }
+    @GetMapping("/users")
+    public ResponseEntity<List<Employee>> getAllUsers() {
+        List<Employee> users = adminService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
+
+    @PostMapping("/user")
+    public ResponseEntity<Employee> newUser(@RequestBody Employee newEmployee) {
+        Employee createdUser = adminService.newUser(newEmployee);
+        return ResponseEntity.ok(createdUser);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Employee> getUserById(@PathVariable Long id) {
+        Employee user = adminService.getUserbyId(id);
+        return ResponseEntity.ok(user);
+    }
+
+    @PutMapping("/user/{id}")
+    public ResponseEntity<Employee> updateUser(@RequestBody Employee newEmployee, @PathVariable Long id) {
+        Employee updatedUser = adminService.updateUser(newEmployee, id);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @DeleteMapping("/userDel/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        String result = adminService.deleteUser(id);
+        return ResponseEntity.ok(result);
+    }
+
 }

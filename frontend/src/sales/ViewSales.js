@@ -16,7 +16,7 @@ export default function ViewItem() {
   }, []);
 
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/item/${id}`);
+    const result = await axios.get(`http://localhost:8080/api/v1/admin/item/${id}`);
     setItem(result.data);
   };
 

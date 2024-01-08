@@ -24,22 +24,19 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @PostMapping("/user")
-    public Employee newUser(@RequestBody  Employee newEmployee) {
+    public Employee newUser(Employee newEmployee) {
         return employeeRepository.save(newEmployee);
     }
 
     @Override
-    @GetMapping("/users/{id}")
-    public Employee getUserbyId(@PathVariable Long id){
+    public Employee getUserbyId(Long id){
         return employeeRepository.findById(id)
                 .orElseThrow(()->new EmployeeNotFoundException(id));
     }
 
 
     @Override
-    @PutMapping("/user/{id}")
-    public Employee updateUser(@RequestBody Employee newEmployee, @PathVariable Long id){
+    public Employee updateUser(Employee newEmployee, Long id){
         return employeeRepository.findById(id)
                 .map(employee -> {
                     employee.setUsername((newEmployee.getUsername()));
@@ -50,8 +47,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @DeleteMapping("/userDel/{id}")
-    public String deleteUser(@PathVariable Long id){
+    public String deleteUser(Long id){
         if(!employeeRepository.existsById(id)){
             throw new EmployeeNotFoundException(id);
         }

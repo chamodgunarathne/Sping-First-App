@@ -12,15 +12,14 @@ export default function Home() {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8080/items");
+    const result = await axios.get("http://localhost:8080/api/v1/admin/items");
     setItems(result.data);
   };
  
-
   const deleteUser = async (id) => {
     const isConfirmed = window.confirm("Are you sure you want to delete the user?");
     if (isConfirmed) {
-      await axios.delete(`http://localhost:8080/itemDelete/${id}`);
+      await axios.delete(`http://localhost:8080/api/v1/admin/itemDelete/${id}`);
     loadUsers();
     } else {
       console.log("Error deleted item.");
@@ -36,8 +35,6 @@ export default function Home() {
     </Link>
 </div>
 
-    
-    
             <div className="container">
                     
       <div className="py-4">

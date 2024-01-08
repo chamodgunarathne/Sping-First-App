@@ -19,7 +19,7 @@ export default function AddUser() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/item", item);
+    await axios.post("http://localhost:8080/api/v1/admin/item", item);
     window.alert("New user added to the system");
     navigate("/sales");
   };

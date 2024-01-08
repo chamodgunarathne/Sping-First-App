@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public interface AdminService {
+
     List<Employee> getAllUsers();
 
     Employee newUser(Employee newEmployee);
