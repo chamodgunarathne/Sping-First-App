@@ -1,7 +1,16 @@
 package com.spingsample.backend.repository;
 
+import com.spingsample.backend.model.Role;
 import com.spingsample.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User,Long> {
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findByEmail(String email);
+
+    User findByRole(Role role);
 }

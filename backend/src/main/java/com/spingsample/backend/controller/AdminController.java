@@ -1,19 +1,19 @@
 package com.spingsample.backend.controller;
 
-import com.spingsample.backend.services.impl.AuthenticationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor
-public class UserController {
+public class AdminController {
 
     @GetMapping
     public ResponseEntity<String> sayHello(){
-        return ResponseEntity.ok("Hi user");
+        return ResponseEntity.ok("Hi Admin");
     }
 }
