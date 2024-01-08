@@ -20,17 +20,18 @@ export default function Home() {
         console.error('Access token not available');
         return;
       }
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          "Authorization": `Bearer ${accessToken}`,
+        }
+      };
   
-      const result = await axios.get("http://localhost:8080/api/v1/admin/users", {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-         // Add this line
-      },
-      
-    });
+      const result = await axios.get("http://localhost:8080/api/v1/admin/users", config);
   
       setUsers(result.data);
-      console.log(result.data);
+      console.log(result);
     } catch (error) {
       // Handle errors, e.g., token expiration or network issues
       if (error.response) {

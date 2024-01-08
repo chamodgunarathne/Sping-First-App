@@ -28,8 +28,8 @@ export default function EditUser() {
     const isConfirmed = window.confirm("Are you sure you want to edit the details?");
   
     if (isConfirmed) {
-      await axios.put(`http://localhost:8080/user/${id}`, user);
-      navigate("/sales");
+      await axios.put(`http://localhost:8080/api/v1/admin/user/${id}`, user);
+      navigate("/dashboard");
     } else {
       console.log("Form submission canceled.");
     }
@@ -42,6 +42,7 @@ export default function EditUser() {
 
   return (
     <div className="container">
+      
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
           <h2 className="text-center m-4">Edit User</h2>
