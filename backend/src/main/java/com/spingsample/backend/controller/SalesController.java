@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3001")
 @RequestMapping("/api/v1/admin")
 public class SalesController {
 
